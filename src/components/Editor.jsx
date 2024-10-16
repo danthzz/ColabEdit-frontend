@@ -16,7 +16,7 @@ function Editor() {
     const { userData } = useContext(UserContext);
     const navigate = useNavigate();
     const textAreaRef = useRef(null);
-    const baseUrl = 'https://colab-edt-backend-iota.vercel.app'
+    const baseUrl = 'https://colab-edt-backend.vercel.app'
     const socket = io(baseUrl);
 
     useEffect(() => {

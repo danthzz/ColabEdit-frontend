@@ -7,7 +7,7 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const baseUrl = 'https://colab-edt-backend-iota.vercel.app'
+  const baseUrl = 'https://colab-edt-backend.vercel.app'
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
