@@ -17,7 +17,10 @@ function Editor() {
     const navigate = useNavigate();
     const textAreaRef = useRef(null);
     const baseUrl = 'https://colab-edt-backend.vercel.app'
-    const socket = io(baseUrl);
+    const socket = io(baseUrl, {
+        transports: ['websocket', 'polling'],
+        withCredentials: true,
+    });
 
     useEffect(() => {
         if (!userData) {
