@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+const baseUrl = 'https://colab-edt-backend.vercel.app'
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', { username, password });
+      const response = await axios.post(`${baseUrl}/api/users/login`, { username, password });
       const { token, color } = response.data;
       const userData = { username, token, color };
       localStorage.setItem('userData', JSON.stringify(userData));

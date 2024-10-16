@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const socket = io('http://localhost:5000');
 
 function Editor() {
     const [content, setContent] = useState('');
@@ -17,6 +16,8 @@ function Editor() {
     const { userData } = useContext(UserContext);
     const navigate = useNavigate();
     const textAreaRef = useRef(null);
+    const baseUrl = 'https://colab-edt-backend-iota.vercel.app'
+    const socket = io(baseUrl);
 
     useEffect(() => {
         if (!userData) {
@@ -59,7 +60,7 @@ function Editor() {
         try {
             setCurrentVersion(currentVersion + 1);
             socket.emit('save-document', { content, version: currentVersion });
-            const response = await axios.post('http://localhost:5000/api/docs/newDoc', { content });
+            const response = await axios.post(`${baseUrl}/api/docs/newDoc`, { content });
             setTotalVersions(response.data.document.versions.length);
             alert('Documento salvo com sucesso!');
         } catch (error) {
@@ -74,7 +75,7 @@ function Editor() {
         setIsSaving(true);
         try {
             socket.emit('save-document', { content });
-            const response = await axios.put(`http://localhost:5000/api/docs/version/${currentVersion}`, { content });
+            const response = await axios.put(`${baseUrl}/api/docs/version/${currentVersion}`, { content });
             alert('Documento atualizado com sucesso!');
         } catch (error) {
             console.error('Erro ao atualizar documento:', error);
@@ -88,7 +89,7 @@ function Editor() {
         if (currentVersion < totalVersions) {
             const nextVersion = currentVersion + 1;
             try {
-                const response = await axios.get(`http://localhost:5000/api/docs/version/${nextVersion}`);
+                const response = await axios.get(`${baseUrl}/api/docs/version/${nextVersion}`);
                 setContent(response.data.version.content);
                 setCurrentVersion(nextVersion);
             } catch (error) {
@@ -101,7 +102,7 @@ function Editor() {
         if (currentVersion > 1) {
             const previousVersion = currentVersion - 1;
             try {
-                const response = await axios.get(`http://localhost:5000/api/docs/version/${previousVersion}`);
+                const response = await axios.get(`${baseUrl}/api/docs/version/${previousVersion}`);
                 setContent(response.data.version.content);
                 setCurrentVersion(previousVersion);
             } catch (error) {

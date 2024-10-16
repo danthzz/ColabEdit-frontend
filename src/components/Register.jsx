@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importando o CSS do Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const baseUrl = 'https://colab-edt-backend-iota.vercel.app'
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', { username, password });
+      const response = await axios.post(`${baseUrl}/api/users/register`, { username, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       navigate('/');
