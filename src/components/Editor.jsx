@@ -17,7 +17,7 @@ function Editor() {
     const navigate = useNavigate();
     const textAreaRef = useRef(null);
     const baseUrl = 'https://colabedt-backend.onrender.com'
-    const socket = io(baseUrl);
+    const socket = io(baseUrl, { transports: ['websocket'] });
 
     useEffect(() => {
         if (!userData) {
@@ -37,6 +37,7 @@ function Editor() {
         });
 
         socket.on('receive-changes', (newContent) => {
+            console.log('Recebendo alterações:', newContent);
             setContent(newContent);
         });
 
@@ -44,6 +45,14 @@ function Editor() {
             if (JSON.stringify(newUsers) !== JSON.stringify(userList)) {
                 setUserList(newUsers);
             }
+        });
+
+        socket.on('connect', () => {
+            console.log('Conectado ao servidor WebSocket');
+        });
+        
+        socket.on('disconnect', () => {
+            console.log('Desconectado do servidor WebSocket');
         });
 
         socket.emit('force-update-user-list');
