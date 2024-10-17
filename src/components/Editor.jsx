@@ -17,7 +17,7 @@ function Editor() {
     const navigate = useNavigate();
     const textAreaRef = useRef(null);
     const baseUrl = 'https://colabedt-backend.onrender.com'
-    const socket = io(baseUrl, { transports: ['websocket'] });
+    const socket = io(baseUrl, { transports: ['websocket', 'polling'] });
 
     useEffect(() => {
         if (!userData) {
