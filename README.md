@@ -1,8 +1,9 @@
-# React + Vite
+# Collab Edit // Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma ferramenta que usa WebSockets para uma edição de texto colaborativa em tempo real.
 
-Currently, two official plugins are available:
+Para rodar o projeto:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Instale as dependencias usando: npm install --legacy-peer-deps
+
+rode o frontend usando: npm run dev 
