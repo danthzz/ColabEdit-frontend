@@ -16,7 +16,7 @@ function Editor() {
     const { userData } = useContext(UserContext);
     const navigate = useNavigate();
     const textAreaRef = useRef(null);
-    const baseUrl = 'https://colab-edt-backend.vercel.app'
+    const baseUrl = 'https://colabedt-backend.onrender.com'
     const socket = io(baseUrl, {
         transports: ['websocket', 'polling'],
         withCredentials: true,
