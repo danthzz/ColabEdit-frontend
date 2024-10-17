@@ -39,6 +39,7 @@ function Editor() {
         socket.on('receive-changes', (newContent) => {
             console.log('Recebendo alterações:', newContent);
             setContent(newContent);
+            console.log(content)
         });
 
         socket.on('user-list', (newUsers) => {
